@@ -1,0 +1,7 @@
+ds3,Picocyanobacteria,SAR11,SAR86,AEGEAN-169,Rhodobacteraceae,Ammonia oxidizers (AOA),Nitrite oxidizers / nitrifiers,SAR202 / deep heterotrophs,SAR406 / deep heterotrophs,SAR324 / deep heterotrophs,Marine Group II Archaea,Marine Group III Archaea,Sulfur oxidizers,Aerobic methanotrophs
+A_surface,10.355,34.692,12.287,9.458,2.954,0.166,0.001,0.459,1.343,0.640,0.439,0.200,0.293,0.000
+B_nearsurface,9.900,30.627,12.071,7.959,3.376,0.552,0.015,1.086,2.272,0.774,1.019,0.633,0.426,0.000
+C_DCM,9.425,29.075,9.262,5.760,1.832,3.340,0.129,3.420,4.482,2.524,2.323,1.934,0.688,0.001
+D_below_DCM,1.408,18.388,5.068,3.085,0.404,15.083,0.892,9.497,6.445,5.465,4.971,2.553,1.443,0.024
+F_300-600,0.048,15.844,3.759,2.901,0.067,19.784,1.506,7.131,8.119,5.655,5.123,2.984,1.816,0.384
+G_below_600,0.043,15.934,1.569,1.630,0.089,19.993,1.494,8.009,10.591,4.583,3.164,3.832,0.366,1.719

@@ -1,0 +1,15 @@
+role	input	purpose
+source	data/otu_table_prok_clean.csv	16S community matrix
+source	data/otu_table_euk_clean.csv	18S community matrix
+intermediate	data/16S_samples_CTD_chemistry.csv	16S depth/station/season/bottom-depth/near-bottom metadata
+intermediate	data/18S_samples_CTD_chemistry.csv	18S depth/station/season/bottom-depth/near-bottom metadata
+intermediate	data/sample_level_core_functional_traits.csv	18S-derived trophic-trait matrix
+source	data/CTD_profiles/	raw or minimally processed fluorescence profiles for independent DCM extraction
+output	results/fig02/boundary_scan_global.csv	global candidate-depth scores
+output	results/fig02/boundary_scan_seasonal.csv	winter/summer candidate-depth scores
+output	results/fig02/boundary_bootstrap.csv	profile-bootstrap peak-depth distributions
+output	results/fig02/boundary_permutation.csv	max-statistic permutation null distribution/results
+output	results/fig02/breakpoint_estimates.csv	global and seasonal breakpoint estimates and uncertainty
+output	results/fig02/covariate_controlled_boundary.csv	deep-boundary test controlling for station, bottom depth and near-bottom status
+output	results/fig02/dcm_peaks_from_ctd.csv	CTD fluorescence-derived DCM peak depths including dual peaks
+output	results/fig02/candidate_depth_support.csv	profile/sample support at each candidate depth

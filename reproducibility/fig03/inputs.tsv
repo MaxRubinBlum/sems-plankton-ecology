@@ -1,0 +1,13 @@
+role	input	purpose
+source	data/otu_table_prok_clean.csv	cleaned 16S feature-by-sample abundance table
+source	data/taxonomy_prok_clean.csv	16S feature taxonomy
+source	data/otu_table_euk_clean.csv	cleaned 18S feature-by-sample abundance table
+source	data/taxonomy_euk_clean.csv	18S feature taxonomy
+intermediate	data/16S_samples_CTD_chemistry.csv	16S sample metadata including depth, vertical habitat class and season
+intermediate	data/18S_samples_CTD_chemistry.csv	18S sample metadata including depth, vertical habitat class and season
+intermediate	data/sample_level_core_functional_traits.csv	sample-level 18S trophic-trait abundances used for continuous trait profiles
+output	results/fig03/16S_selected_taxa_pooled.csv	fixed pooled 16S taxon selection and depth medians
+output	results/fig03/18S_selected_taxa_pooled.csv	fixed pooled 18S taxon selection and depth medians
+output	results/fig03/16S_winter_summer_medians.csv	seasonal layer medians for selected 16S taxa
+output	results/fig03/18S_winter_summer_medians.csv	seasonal layer medians for selected 18S taxa
+output	results/fig03/trait_depth_summaries.csv	winter/summer moving-depth medians and IQRs for five trophic traits

@@ -1,0 +1,8 @@
+role	input	purpose
+intermediate	data/16S_samples_CTD_chemistry.csv	16S sample-associated CTD/environmental variables and metadata
+intermediate	data/18S_samples_CTD_chemistry.csv	18S sample-associated CTD/environmental variables and metadata
+source	data/waterstations.xlsx	station coordinates/geographic metadata where required
+output	results/fig01/hydrographic_pca_scores.csv	main CTD PCA sample scores
+output	results/fig01/hydrographic_pca_loadings.csv	main CTD PCA variable loadings
+output	results/fig01/hydrographic_pca_variance.csv	variance explained by PCA axes
+output	results/fig01/environmental_plot_data.csv	exact sample-level data plotted in Figure 1

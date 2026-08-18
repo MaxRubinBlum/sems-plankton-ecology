@@ -1,0 +1,5 @@
+role	input
+panel_a_whole_community	results/eastmed_crossdomain_concordance/16S_18S_whole_community_concordance.csv
+panel_a_depth_stratified	results/eastmed_crossdomain_concordance/16S_18S_concordance_by_depth_and_regime.csv
+panel_b_stable_associations	results/eastmed_trait_crossdomain/protist_traits_vs_16S_stable_links.csv
+panel_b_taxonomy	SILVA classifier output used in the 16S analysis; labels in the stable-association table are retained without GTDB substitution

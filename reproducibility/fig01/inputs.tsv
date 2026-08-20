@@ -1,8 +1,13 @@
 role	input	purpose
-intermediate	data/16S_samples_CTD_chemistry.csv	16S sample-associated CTD/environmental variables and metadata
-intermediate	data/18S_samples_CTD_chemistry.csv	18S sample-associated CTD/environmental variables and metadata
-source	data/waterstations.xlsx	station coordinates/geographic metadata where required
-output	results/fig01/hydrographic_pca_scores.csv	main CTD PCA sample scores
-output	results/fig01/hydrographic_pca_loadings.csv	main CTD PCA variable loadings
-output	results/fig01/hydrographic_pca_variance.csv	variance explained by PCA axes
-output	results/fig01/environmental_plot_data.csv	exact sample-level data plotted in Figure 1
+intermediate	data/16S_samples_CTD_chemistry.csv	16S sample-associated metadata used for PCoA and Shannon mapping
+intermediate	data/18S_samples_CTD_chemistry.csv	18S sample-associated metadata used for PCoA, Shannon mapping and sampling design
+source	data/otu_table_prok_clean.csv	cleaned 16S ASV abundance table
+source	data/otu_table_euk_clean.csv	cleaned 18S ASV abundance table
+source	data/metadata_euk_clean.csv	original 18S sample metadata including bottom-water depth for the sampling-design panel
+output	results/fig01/16S_bray_pcoa_scores.csv	16S Bray-Curtis PCoA sample scores
+output	results/fig01/16S_bray_pcoa_variance.csv	16S PCoA explained variance
+output	results/fig01/18S_bray_pcoa_scores.csv	18S Bray-Curtis PCoA sample scores
+output	results/fig01/18S_bray_pcoa_variance.csv	18S PCoA explained variance
+output	results/fig01/Shannon_by_sample.csv	sample-level 16S and 18S Shannon diversity
+output	results/fig01/Shannon_lowess_curves.csv	combined and season-specific LOWESS coordinates
+output	results/fig01/sampling_design_data.csv	exact sample-level data used in the sampling-design panel

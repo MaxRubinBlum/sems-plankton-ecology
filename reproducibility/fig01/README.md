@@ -1,29 +1,41 @@
-# Figure 1 — hydrographic template
+# Figure 1 — vertical microbial organization
 
-Figure 1 establishes the environmental structure in which the microbial samples were collected.
+Figure 1 establishes the sampling structure and the broad vertical organization of prokaryotic and microbial-eukaryotic communities.
 
-## Inputs
+## Main panels
 
-Primary inputs are the integrated sample/CTD tables for 16S and 18S samples and the station metadata. CTD variables used in the hydrographic ordination are temperature, salinity, dissolved oxygen and fluorescence. The chemistry-expanded ordination is retained as a supplementary analysis rather than replacing the CTD-only main panel.
+- Sampling design along the H transect, with linear depth, established vertical-habitat colors, and winter/summer symbols.
+- Bray–Curtis PCoA of 16S community composition.
+- Bray–Curtis PCoA of 18S community composition.
+- 16S Shannon diversity versus depth.
+- 18S Shannon diversity versus depth.
+
+The CTD-only hydrographic PCA previously included in the main figure has moved to the supplementary hydrography workflow together with the chemistry-expanded ordination.
+
+## Shannon diversity
+
+Shannon diversity is calculated directly from the ASV abundance tables after converting each sample to relative abundance, using the natural-log definition H = -sum(p * ln p).
+
+The main alpha-diversity curve combines winter and summer samples and uses robust LOWESS smoothing (`frac=0.28`, `it=2`). Thin season-specific curves are calculated independently for winter and summer (`frac=0.34`, `it=2`) and are displayed only as secondary context. The figure legend identifies the thick combined curve, thin solid winter curve, and thin dashed summer curve.
 
 ## Analytical requirements
 
-- Sampling depth in the vertical environmental panel is plotted on a linear depth scale, beginning at 0 m.
-- Summer and winter samples use different symbols while retaining the established depth/habitat color scheme.
-- The hydrographic PCA is calculated after centering and scaling the CTD variables temperature, salinity, dissolved oxygen and fluorescence so variables measured in different units contribute comparably.
-- PCA is fitted only to complete observations for the variables entering that ordination; sample filtering and final n must be exported with the scores.
-- The plotted PCA scores, variable loadings, explained variance and sample identifiers must be written to derived tables.
-- Chemistry is not silently mixed into the main hydrographic PCA. The expanded CTD+chemistry analysis is a separate supplementary workflow with its own complete-case set and documented variables.
+- PCoA uses Bray–Curtis dissimilarity calculated from sample-wise relative abundances.
+- PCoA variance is calculated from the positive eigenvalues, matching the validated Figure 1 checkpoint.
+- Sampling depth uses a linear axis beginning at 0 m.
+- Depth/habitat colors remain identical across sampling, PCoA, and Shannon panels.
+- Winter and summer retain distinct point symbols.
+- Shannon profiles use actual sample-level values; the smooth is descriptive and does not define ecological boundaries.
+- No Figure 2 breakpoint or DCM-transition line is imposed on the Shannon panels, preserving their independence from the boundary analysis.
 
 ## Outputs to retain
 
 - final Figure 1 SVG/PDF/600-dpi JPEG
-- PCA scores
-- PCA loadings
-- explained variance
-- sample-level environmental table used for plotting
-- station/depth/season mapping used for aesthetics
+- 16S and 18S PCoA scores and explained variance
+- sample-level Shannon values
+- LOWESS coordinates for combined, winter, and summer curves
+- sampling-design table including station, depth, season, habitat class, and bottom depth
 
-## Methods traceability
+## Interpretation checkpoint
 
-The manuscript Methods should state that hydrographic PCA used standardized CTD temperature, salinity, dissolved oxygen and fluorescence associated with the microbial samples. The supplementary chemistry-expanded analysis must list its additional variables explicitly and report any reduction in sample number due to chemistry availability.
+The alpha-diversity profiles provide an independent view of vertical organization. The 18S Shannon maximum occurs near the shallow eukaryotic turnover zone identified independently in Figure 2, whereas the 16S profile forms a broader high-diversity zone around the deeper prokaryotic transition. These patterns support, but do not define, the boundary analysis.

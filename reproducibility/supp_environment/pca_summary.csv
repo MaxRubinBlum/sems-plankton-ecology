@@ -1,0 +1,3 @@
+panel,n,PC1_percent,PC2_percent,variables
+CTD,249,57.06127932,25.47752013,"temperature;salinity;dissolved oxygen;fluorescence"
+CTD_plus_chemistry,67,65.92501896,17.03107994,"temperature;salinity;dissolved oxygen;fluorescence;nitrate+nitrite;phosphate;silicate;pH"

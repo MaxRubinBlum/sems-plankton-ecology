@@ -1,21 +1,36 @@
-# Figure 4 — cross-domain concordance and trophic associations
+# Figure 4 — cross-domain community concordance
 
-Figure 4 uses the original SILVA-based prokaryotic taxonomy. GTDB/hybrid relabeling is not used in the manuscript figure.
+This directory reproduces the current Figure 4 analysis: Procrustes concordance between paired 16S and 18S rRNA gene community compositions across the full water column, after environmental/sampling adjustment, and within vertical ecological regimes.
 
-## Panel a: cross-domain concordance
+## Analysis
 
-Panel a summarizes concordance between paired 16S and 18S community composition for the whole dataset, after accounting for hydrographic structure, and within the seven vertical habitats. Points are Spearman rho; n is the number of paired samples.
+1. Intersect sample IDs present in the 16S table, 18S table and environmental metadata.
+2. Convert each ASV/OTU table to sample-wise relative abundance.
+3. Calculate Bray–Curtis dissimilarities separately for 16S and 18S.
+4. Perform classical PCoA on each Bray–Curtis matrix and retain the first eight positive axes for the displayed analysis.
+5. Compare the 16S and 18S configurations by symmetric Procrustes rotation and calculate the Procrustes correlation.
+6. Assess significance by permutation (PROTEST-style permutation of sample correspondence).
+7. For the adjusted analysis, regress the PCoA coordinates on log-depth, CTD temperature, salinity, dissolved oxygen, fluorescence, season and station, and perform Procrustes analysis on the residual configurations.
+8. Repeat the comparison independently within the seven vertical ecological regimes. The adjusted within-regime model is fitted only where at least 20 complete environmental cases are available.
 
-Inputs are the validated whole-community and depth-stratified concordance result tables listed in `inputs.tsv`.
+The near-bottom regime has 15 complete environmental cases and is therefore shown only as an unadjusted comparison.
 
-## Panel b: prokaryote–eukaryotic trophic-trait associations
+## Main results
 
-Associations were calculated separately within vertical habitats and combined across habitats to reduce correlations produced solely by shared vertical distributions. Displayed links satisfy FDR < 0.05 and retain the same direction with |rho| >= 0.10 in at least five of seven vertical habitats. Circle color gives the direction and magnitude of the pooled within-depth Spearman correlation and circle size gives |rho|.
+- Whole water column: n = 308, Procrustes r = 0.91, permutation P < 0.001.
+- Adjusted complete-case dataset: n = 248, Procrustes r = 0.79, permutation P < 0.001.
+- All adjusted within-regime comparisons shown in the figure have permutation P < 0.001.
 
-The displayed prokaryotic labels are the original SILVA classifier assignments. Only rank-prefix formatting is removed for plotting; no GTDB substitutions or manually forced cross-taxonomy equivalences are applied.
+A sensitivity analysis across PCoA dimensionality confirms that the result is not dependent on retaining eight axes. The adjusted correlation stabilizes at approximately r = 0.79 when 8–20 axes are retained.
 
-The final figure contains no panel letters or panel headers; these are added during manuscript assembly.
+## Figure conventions
 
-## Manuscript legend
+Open circles represent 16S configurations and filled circles represent aligned 18S configurations. Lines connect the two representations of the same paired sample. To reduce visual clutter, the plotted figure displays a reproducible random subset of connecting lines, while all samples contribute to the Procrustes statistics. Panel a uses vertical-regime colors; the environment-adjusted panel uses neutral symbols. The final panel compares unadjusted and adjusted within-regime correlations.
 
-**Figure 4 | Cross-domain concordance between prokaryotic and microbial-eukaryotic communities and associations with eukaryotic trophic strategies.** **a,** Concordance between 16S and 18S community composition across the complete dataset, after accounting for hydrographic structure, and within individual vertical habitats. Points show Spearman’s rho; sample sizes (n) indicate the number of paired 16S–18S samples contributing to each comparison. **b,** Stable associations between prokaryotic lineages and major microbial-eukaryotic trophic strategies. Associations were calculated separately within vertical habitats and combined across habitats, thereby minimizing correlations arising solely from shared vertical distributions. Only associations significant after FDR correction (q < 0.05) and showing a consistent direction with |rho| >= 0.10 in at least five of seven vertical habitats are shown. Circle color indicates the direction and magnitude of the pooled within-depth Spearman correlation, and circle size represents |rho|. Prokaryotic lineages are shown according to SILVA taxonomy.
+## Interpretation
+
+The analysis tests cross-domain community concordance, not direct interactions among individual taxa. Persistence of concordance after environmental adjustment and within vertical regimes indicates coordinated community organization beyond the dominant shared water-column gradient, but it does not establish causal or pairwise biological coupling.
+
+## Reproduction
+
+Run `python reproducibility/fig04/make_figure.py` from the repository root. The script reads the input paths documented in `inputs.tsv` and writes analysis summaries and figure files under `results/figure4_cross_domain_concordance/`.

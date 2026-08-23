@@ -1,6 +1,6 @@
 role	path	description
-16S_table	data/otu_table_prok_clean.csv	Clean prokaryotic ASV/OTU abundance table; samples in columns
-18S_table	data/otu_table_euk_clean.csv	Clean microbial-eukaryotic ASV/OTU abundance table; samples in columns
-metadata	data/18S_samples_CTD_chemistry.csv	Paired sample metadata, vertical-regime assignment, CTD variables, season and station
+16S_table	data/raw/16S/otu_table.csv	Clean prokaryotic ASV/OTU abundance table used for Figure 4; samples in columns
+18S_table	data/raw/18S/otu_table.csv	Clean microbial-eukaryotic ASV/OTU abundance table used for Figure 4; samples in columns
+metadata	data/processed/18S_samples_CTD_chemistry.csv	Integrated paired-sample metadata with vertical-regime assignment, CTD variables, season and station
 output_summary	results/figure4_cross_domain_concordance/community_concordance_summary.csv	Within-regime Procrustes results
 output_global	results/figure4_cross_domain_concordance/global_concordance_summary.csv	Whole-water-column and adjusted Procrustes results

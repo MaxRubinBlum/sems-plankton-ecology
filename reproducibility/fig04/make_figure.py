@@ -12,9 +12,9 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
 
 ROOT = Path(__file__).resolve().parents[2]
-O16 = ROOT / 'data/raw/16S/otu_table.csv'
-O18 = ROOT / 'data/raw/18S/otu_table.csv'
-META = ROOT / 'data/processed/18S_samples_CTD_chemistry.csv'
+O16 = ROOT / 'data/raw/16S/otu_table_prok_clean.csv.gz'
+O18 = ROOT / 'data/raw/18S/otu_table_euk_clean.csv.gz'
+META = ROOT / 'data/processed/metadata/18S_samples_CTD_chemistry.csv'
 OUT = ROOT / 'results/figure4_cross_domain_concordance'
 OUT.mkdir(parents=True, exist_ok=True)
 

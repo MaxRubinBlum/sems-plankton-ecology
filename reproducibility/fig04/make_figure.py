@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Reproduce Figure 4: paired 16S–18S community concordance."""
 from pathlib import Path
+import sys
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -11,9 +12,9 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
 
 ROOT = Path(__file__).resolve().parents[2]
-O16 = ROOT / 'data/otu_table_prok_clean.csv'
-O18 = ROOT / 'data/otu_table_euk_clean.csv'
-META = ROOT / 'data/18S_samples_CTD_chemistry.csv'
+O16 = ROOT / 'data/raw/16S/otu_table.csv'
+O18 = ROOT / 'data/raw/18S/otu_table.csv'
+META = ROOT / 'data/processed/18S_samples_CTD_chemistry.csv'
 OUT = ROOT / 'results/figure4_cross_domain_concordance'
 OUT.mkdir(parents=True, exist_ok=True)
 
@@ -24,10 +25,17 @@ ENV = ['depth','ctd_temperature','ctd_salinity','ctd_oxygen','ctd_fluorescence']
 REGIMES = ['A_surface','B_nearsurface','C_DCM','D_below_DCM','F_300-600','G_below_600','H_near_bottom']
 REGIME_NAMES = ['Surface','Near-surface','DCM','Below DCM','300–600 m','>600 m','Near-bottom']
 
+missing = [p for p in (O16,O18,META) if not p.exists()]
+if missing:
+    sys.exit('Missing Figure 4 input(s):\n' + '\n'.join(f'  - {p.relative_to(ROOT)}' for p in missing) +
+             '\nSee data/raw/README.md and reproducibility/fig04/README.md for required inputs.')
+
 o16 = pd.read_csv(O16).set_index('OTUID')
 o18 = pd.read_csv(O18).set_index('OTUID')
 meta = pd.read_csv(META).set_index('sample-id')
 ids = sorted(set(o16.columns) & set(o18.columns) & set(meta.index))
+if len(ids) != 308:
+    raise ValueError(f'Expected 308 paired samples for the validated analysis, found {len(ids)}.')
 
 def pcoa(otu, samples, k=AXES):
     x = otu[samples].T.astype(float)
@@ -62,16 +70,15 @@ def design(m):
 def residualize(y,x):
     return y-LinearRegression().fit(x,y).predict(x)
 
-# Whole water column
 A=pcoa(o16,ids); B=pcoa(o18,ids); Ag,Bg,r_global=align(A,B); _,p_global=protest(A,B)
 
-# Environment/sampling adjusted complete cases
 good=meta.loc[ids,ENV].notna().all(axis=1)
 ids_adj=list(np.array(ids)[good.values]); m=meta.loc[ids_adj]
+if len(ids_adj) != 248:
+    raise ValueError(f'Expected 248 complete environmental cases, found {len(ids_adj)}.')
 A=pcoa(o16,ids_adj); B=pcoa(o18,ids_adj); X=design(m)
 Ar=residualize(A,X); Br=residualize(B,X); Aa,Ba,r_adj=align(Ar,Br); _,p_adj=protest(Ar,Br)
 
-# Within-regime tests
 rows=[]
 for reg in REGIMES:
     ss=[s for s in ids if meta.loc[s,'ds2']==reg]
@@ -87,7 +94,6 @@ summary=pd.DataFrame(rows,columns=['regime','n','procrustes_r','p','n_complete_e
 summary.to_csv(OUT/'community_concordance_summary.csv',index=False)
 pd.DataFrame([['whole',len(ids),r_global,p_global],['adjusted',len(ids_adj),r_adj,p_adj]],columns=['analysis','n','procrustes_r','p']).to_csv(OUT/'global_concordance_summary.csv',index=False)
 
-# Figure
 cycle=plt.rcParams['axes.prop_cycle'].by_key()['color']; colors={r:cycle[i] for i,r in enumerate(REGIMES)}
 fig=plt.figure(figsize=(12.6,8.1)); gs=fig.add_gridspec(2,2,height_ratios=[1.03,.97],hspace=.42,wspace=.25)
 ax1=fig.add_subplot(gs[0,0]); ax2=fig.add_subplot(gs[0,1]); ax3=fig.add_subplot(gs[1,:]); rng=np.random.default_rng(SEED)

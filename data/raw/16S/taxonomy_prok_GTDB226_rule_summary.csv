@@ -1,0 +1,7 @@
+decision_rule,label_basis,n_ASVs
+ecological_clade_retained,SILVA ecological lineage,2794
+SILVA_retained,SILVA genus,438
+confident_GTDB_refinement,GTDB226 genus,386
+fallback_GTDB_family,GTDB226 family,223
+fallback_SILVA_family,SILVA family,22
+fallback_SILVA_order,SILVA order,3

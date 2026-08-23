@@ -1,5 +1,6 @@
-role	input
-panel_a_whole_community	results/eastmed_crossdomain_concordance/16S_18S_whole_community_concordance.csv
-panel_a_depth_stratified	results/eastmed_crossdomain_concordance/16S_18S_concordance_by_depth_and_regime.csv
-panel_b_stable_associations	results/eastmed_trait_crossdomain/protist_traits_vs_16S_stable_links.csv
-panel_b_taxonomy	SILVA classifier output used in the 16S analysis; labels in the stable-association table are retained without GTDB substitution
+role	path	description
+16S_table	data/otu_table_prok_clean.csv	Clean prokaryotic ASV/OTU abundance table; samples in columns
+18S_table	data/otu_table_euk_clean.csv	Clean microbial-eukaryotic ASV/OTU abundance table; samples in columns
+metadata	data/18S_samples_CTD_chemistry.csv	Paired sample metadata, vertical-regime assignment, CTD variables, season and station
+output_summary	results/figure4_cross_domain_concordance/community_concordance_summary.csv	Within-regime Procrustes results
+output_global	results/figure4_cross_domain_concordance/global_concordance_summary.csv	Whole-water-column and adjusted Procrustes results

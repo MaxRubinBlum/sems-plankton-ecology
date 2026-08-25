@@ -116,11 +116,8 @@ y=np.arange(len(REGIMES)); raw=summary.procrustes_r.values; adj=summary.adjusted
 for i in range(len(y)):
     if np.isfinite(adj[i]): ax3.plot([raw[i],adj[i]],[y[i],y[i]],color='.72',lw=1.1,zorder=1)
 ax3.scatter(raw,y,s=50,facecolors='white',edgecolors='.25',linewidths=1,label='Unadjusted',zorder=3)
-mask=np.isfinite(adj); ax3.scatter(adj[mask],y[mask],s=50,c='.35',linewidths=0,label='Adjusted',zorder=4)
-labs=[]
-for i,nm in enumerate(REGIME_NAMES):
-    labs.append(f'{nm}  (n={summary.n.iloc[i]}; adjusted n={summary.n_complete_env.iloc[i]})' if np.isfinite(adj[i]) else f'{nm}  (n={summary.n.iloc[i]})')
-ax3.set_yticks(y,labs); ax3.invert_yaxis(); ax3.set_xlim(.45,.95); ax3.set_xlabel('Procrustes correlation ($r$)'); ax3.text(.005,.98,'c',transform=ax3.transAxes,fontsize=13,fontweight='bold',va='top'); ax3.legend(frameon=False,fontsize=8,loc='lower right',ncol=2); ax3.grid(axis='x',lw=.5,alpha=.18)
+mask=np.isfinite(adj); ax3.scatter(adj[mask],y[mask],s=50,c='.35',linewidths=0,label='Environment-adjusted',zorder=4)
+ax3.set_yticks(y,REGIME_NAMES); ax3.invert_yaxis(); ax3.set_xlim(.45,.95); ax3.set_xlabel('Procrustes correlation ($r$)'); ax3.text(.005,.98,'c',transform=ax3.transAxes,fontsize=13,fontweight='bold',va='top'); ax3.legend(frameon=False,fontsize=8,loc='lower right',ncol=2); ax3.grid(axis='x',lw=.5,alpha=.18)
 for ax in (ax1,ax2,ax3): ax.spines['top'].set_visible(False); ax.spines['right'].set_visible(False)
 fig.subplots_adjust(left=.13,right=.98,top=.95,bottom=.08)
 fig.savefig(OUT/'Figure4_cross_domain_concordance.svg',bbox_inches='tight'); fig.savefig(OUT/'Figure4_cross_domain_concordance.pdf',bbox_inches='tight'); plt.close(fig)

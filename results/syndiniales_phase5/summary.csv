@@ -1,0 +1,5 @@
+metric,value
+ASV_pairs_tested,102
+FDR_supported_positive_ASV_pairs,46
+aggregate_candidates_with_sufficient_ASV_copresence,9
+aggregate_candidates_with_ASV_support,7

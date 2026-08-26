@@ -1,0 +1,13 @@
+metric,value
+upper_residual_supported_edges,241.0
+deep_residual_supported_edges,140.0
+shared_residual_supported_edges,95.0
+shared_edges_same_sign,93.0
+shared_edges_sign_reversal,2.0
+comparable_parasite_lineages,45.0
+observed_shared_partner_edges,95.0
+null_mean_shared_partner_edges,97.12655
+global_p_less_overlap,0.2737363131843408
+global_p_more_overlap,0.8358082095895205
+lineages_FDR_excess_turnover,0.0
+lineages_FDR_excess_conservation,0.0

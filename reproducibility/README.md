@@ -21,7 +21,8 @@ This directory is the provenance layer for the manuscript figures. Each figure d
 - Figure 5: cross-domain FlashWeave associations
 - Supplement: chemistry-expanded hydrography/PCA and fine-resolution 16S seasonal succession
 - Syndiniales supplement Phase 1: vertical parasite-community structure and objective boundary
-- Syndiniales supplement Phase 2: depth-dependent restructuring of parasite–protist associations
+- Syndiniales supplement Phase 2: depth-dependent restructuring of parasite–protist association strength
+- Syndiniales Phase 3: partner-repertoire stability and strict turnover null test
 
 ## Syndiniales analyses
 
@@ -30,7 +31,10 @@ The complete parasite workflow is under `reproducibility/syndiniales/`.
 - `INPUT_MANIFEST.md` records the exact unfiltered 18S and metadata inputs and SHA-256 checksums used for the archived analysis.
 - `phase1/` contains the Syndiniales-only Bray–Curtis boundary scan, permutation/bootstrap specification, PERMDISP, clade-level depth analysis, and supplementary figure script.
 - `phase2/` contains the unfiltered-18S input preparation, regime-specific FlashWeave inference, cross-regime retesting, formal partner × regime interaction model, guild enrichment test, and supplementary figure script.
+- `phase3/` tests whether exact partner identities turn over more than expected after preserving parasite-specific candidate space, regime-specific availability, degree, and partner-guild composition.
 
 The Phase-2 documentation explicitly distinguishes sparse-network selection differences from statistically supported ecological turnover. Broad partner-guild directional enrichment was tested and was not significant after FDR correction; individual associations must therefore not be generalized into a community-wide host-guild shift.
+
+Phase 3 further shows that the apparent near-zero overlap of independently selected FlashWeave edges is not evidence for wholesale partner replacement. Cross-regime residual retesting recovered 95 shared associations, 93 of which retained the same sign. Under the strict parasite-specific candidate-universe null, observed exact partner overlap was indistinguishable from expectation. The supported interpretation is therefore **changes in association strength within a constrained partner repertoire**, rather than wholesale host/partner switching.
 
 The input manifests distinguish raw/source inputs from intermediate products. Files not yet committed to `data/` are named explicitly so they can be deposited without changing the analytical specification.

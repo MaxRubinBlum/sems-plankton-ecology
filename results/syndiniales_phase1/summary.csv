@@ -1,0 +1,15 @@
+metric,value
+n_samples,310
+n_syndiniales_ASVs,1621
+objective_boundary_m,220
+max_partial_R2,0.2116973343447529
+maxstat_permutation_p,0.005
+bootstrap_median_boundary_m,220
+bootstrap_CI2.5_m,220
+bootstrap_CI97.5_m,240
+winter_boundary_m,220
+winter_partial_R2,0.2725794791093606
+summer_boundary_m,220
+summer_partial_R2,0.20033626555046646
+PERMDISP_F,42.81121705960436
+PERMDISP_p,0.006

@@ -1,0 +1,9 @@
+metric,value
+global_raw_procrustes_r,0.892012
+global_adjusted_procrustes_r,0.765845
+upper_adjusted_procrustes_r,0.749873
+deep_adjusted_procrustes_r,0.492860
+all_displayed_permutation_p,0.001
+boundary_with_syndiniales_m,220
+boundary_without_syndiniales_m,220
+boundary_without_syndiniales_partial_R2,0.208526

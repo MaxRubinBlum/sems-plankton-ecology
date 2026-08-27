@@ -1,4 +1,16 @@
 metric,value
 priority_aggregate_pairs,20
 unique_OTUIDs_requested,78
-representative_sequence_file_available,false
+representative_sequence_file_available,true
+qza_sha256,751d987161559e47a7c39774567e4c966817741c331d7f58ec2803cb5c656670
+qza_representative_features,40736
+OTU_table_features,40736
+feature_id_sets_identical,true
+target_sequences_found,78
+target_sequences_missing,0
+target_sequences_unique,78
+target_sequence_length_min,130
+target_sequence_length_median,132
+target_sequence_length_max,136
+feature_unit,99%-OTU centroid
+clustering_identity,0.99

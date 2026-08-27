@@ -1,5 +1,5 @@
 metric,value
-ASV_pairs_tested,102
-FDR_supported_positive_ASV_pairs,46
-aggregate_candidates_with_sufficient_ASV_copresence,9
-aggregate_candidates_with_ASV_support,7
+OTU99_pairs_tested,102
+FDR_supported_positive_OTU99_pairs,46
+aggregate_candidates_with_sufficient_OTU99_copresence,9
+aggregate_candidates_with_OTU99_support,7

@@ -7,6 +7,9 @@ Figure 4 tests correspondence between paired 16S and 18S rRNA gene community com
 - Whole water column: n = 308 paired samples; Procrustes r = 0.91; permutation P < 0.001.
 - Environment- and sampling-adjusted analysis: n = 248 complete cases; Procrustes r = 0.79; permutation P < 0.001.
 - Adjustment removes variation associated with log-depth, CTD temperature, salinity, dissolved oxygen, fluorescence, season and station.
+- Chemistry-complete paired subset: n = 67; r = 0.835 after the hydrographic/sampling adjustment and r = 0.833 after additionally including nitrate + nitrite, phosphate, silicate and pH; both permutation P = 0.0001.
+
+The chemistry comparison uses the identical 67-sample subset for both models. Adding measured nutrient chemistry therefore leaves the residual cross-domain concordance essentially unchanged in this subset.
 
 Within-regime Procrustes correlations:
 
@@ -26,4 +29,4 @@ For the displayed Procrustes configurations, the first eight positive PCoA axes 
 
 The displayed figure uses open circles for 16S and filled circles for 18S. Panel a colors samples by vertical ecological regime. Only a subset of pair-connecting lines is displayed in panels a and b to reduce visual clutter; all samples contribute to the analyses and reported statistics.
 
-Interpretation should remain at the level of community concordance. These analyses do not establish direct biological interactions between individual prokaryotic and eukaryotic taxa.
+Interpretation should remain at the level of community concordance. These analyses do not establish direct biological interactions between individual prokaryotic and eukaryotic taxa, and residual concordance may still include responses to unmeasured resources, particle dynamics, advection or spatial structure.

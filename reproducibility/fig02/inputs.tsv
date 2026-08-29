@@ -16,4 +16,5 @@ output	results/fig02/matched_nuisance_sensitivity.csv	pooled sensitivity to stat
 output	results/fig02/minimum_profile_sensitivity.csv	sensitivity to minimum support of 10, 12 and 15 spanning profiles
 output	results/fig02/long_16S_2018_2026_scans.csv	full 2018–2026 16S contextual scans
 output	results/fig02/paired_metadata_audit.csv	paired 16S/18S metadata consistency audit
+snapshot	results/fig02/Figure2_full_tables.zip	frozen full revision tables, including large bootstrap/audit outputs
 figure	results/fig02/Figure2_final_clean.svg	generated vector figure; PDF/PNG generated alongside it

@@ -1,13 +1,18 @@
 role	input	purpose
-source	data/otu_table_prok_clean.csv	cleaned 16S feature-by-sample abundance table
-source	data/taxonomy_prok_clean.csv	16S feature taxonomy
-source	data/otu_table_euk_clean.csv	cleaned 18S feature-by-sample abundance table
-source	data/taxonomy_euk_clean.csv	18S feature taxonomy
-intermediate	data/16S_samples_CTD_chemistry.csv	16S sample metadata including depth, vertical habitat class and season
-intermediate	data/18S_samples_CTD_chemistry.csv	18S sample metadata including depth, vertical habitat class and season
-intermediate	data/sample_level_core_functional_traits.csv	sample-level 18S trophic-trait abundances used for continuous trait profiles
-output	results/fig03/16S_selected_taxa_pooled.csv	fixed pooled 16S taxon selection and depth medians
-output	results/fig03/18S_selected_taxa_pooled.csv	fixed pooled 18S taxon selection and depth medians
-output	results/fig03/16S_winter_summer_medians.csv	seasonal layer medians for selected 16S taxa
-output	results/fig03/18S_winter_summer_medians.csv	seasonal layer medians for selected 18S taxa
-output	results/fig03/trait_depth_summaries.csv	winter/summer moving-depth medians and IQRs for five trophic traits
+source	data/raw/16S/otu_table_prok_clean.csv.gz	cleaned 16S 99%-OTU feature-by-sample abundance table
+source	data/raw/16S/taxonomy_prok_clean.csv	16S feature taxonomy
+source	data/raw/18S/otu_table_euk_clean.csv.gz	cleaned 18S 99%-OTU feature-by-sample abundance table
+source	data/raw/18S/taxonomy_euk_clean.csv	18S feature taxonomy
+intermediate	data/processed/metadata/16S_samples_CTD_chemistry.csv	16S sample metadata including depth, vertical habitat and monitoring state
+intermediate	data/processed/metadata/18S_samples_CTD_chemistry.csv	18S sample metadata including depth, vertical habitat and monitoring state
+intermediate	data/processed/traits/sample_level_core_functional_traits.csv	sample-level 18S five-component trophic representation
+output	results/fig03/16S_selected_taxa_pooled.csv	fixed pooled 16S taxon selection and habitat medians
+output	results/fig03/18S_selected_taxa_pooled.csv	fixed pooled 18S taxon selection and habitat medians
+output	results/fig03/16S_winter_summer_medians.csv	seasonal habitat medians for selected 16S taxa
+output	results/fig03/18S_winter_summer_medians.csv	seasonal habitat medians for selected 18S taxa
+output	results/fig03/16S_winter_summer_zscores.csv	joint winter/summer standardized 16S display values
+output	results/fig03/18S_winter_summer_zscores.csv	joint winter/summer standardized 18S display values
+output	results/fig03/trait_depth_summaries_selected_five_normalized.csv	moving-depth medians/IQRs after within-five trophic normalization
+output	results/fig03/Figure3_horizontal_publication.pdf	final vector manuscript figure
+output	results/fig03/Figure3_horizontal_publication.png	600-dpi manuscript figure
+output	results/fig03/Figure3_caption.txt	current manuscript caption

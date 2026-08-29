@@ -1,6 +1,6 @@
-# Sequence-level validation targets — Phase 6
+# Representative-sequence validation — Phase 6
 
-Phase 6 now has the matching 18S representative-sequence artifact and completes the sequence-extraction/provenance step for high-priority candidate host associations.
+Phase 6 validates the matching 18S representative-sequence artifact and evaluates how far the short marker can support candidate-host interpretation.
 
 ## Representative-sequence input
 
@@ -19,30 +19,36 @@ QIIME 2 provenance shows two successive steps:
 1. `q2-dada2 denoise_paired`, with hashed feature IDs.
 2. `q2-vsearch cluster_features_de_novo`, with `perc_identity = 0.99`.
 
-This is analytically important: the current table consists of **99% de-novo OTU clusters represented by centroid sequences**. Although the centroid IDs originate from hashed DADA2 feature IDs, the abundance features analyzed after clustering must not be described as unclustered ASVs.
-
-This provenance correction also applies to Phase 5. Its numerical result is unchanged, but the targeted deaggregation is correctly described as **99%-OTU-level validation**.
+The current abundance table therefore consists of **99% de-novo OTU clusters represented by centroid sequences**, not unclustered ASVs.
 
 ## Target extraction
 
-The Phase-6 priority list contains 78 requested OTUIDs derived from the highest-priority candidate associations.
+All 78 requested high-priority OTUIDs were recovered; none were missing and all 78 centroid sequences were unique. Sequence lengths were 130–136 nt (median 132 nt).
 
-- requested IDs: 78
-- recovered from `rep-seqs-99.qza`: 78
-- missing: 0
-- unique recovered sequences: 78
-- sequence lengths: 130–136 nt; median 132 nt
+`extract_repseq_targets.py` validates the artifact against the OTU table, checks provenance, and extracts a taxonomy-linked target FASTA and metadata table.
 
-`extract_repseq_targets.py` validates the artifact against the OTU table, checks provenance, extracts the requested centroid sequences, and writes a taxonomy-linked FASTA and metadata table.
+## Sequence-resolution audit
 
-The archived target FASTA is intentionally small and contains only the 78 priority centroid sequences rather than the complete 40,736-sequence artifact.
+Because these centroids are only ~132 nt, Phase 6 does not treat them as sufficient for strain- or species-level phylogenetic placement. A local nearest-sequence audit against all 40,736 centroids showed:
 
-## What Phase 6 establishes
+- median nearest-neighbour normalized sequence similarity = 0.985;
+- 85.9% of priority centroids had a top neighbour in the same annotated class;
+- 79.5% had a top neighbour in the same annotated order.
 
-The sequence file now confirms that every sequence-cluster target used for follow-up is recoverable and traceable to the exact abundance feature analyzed in Phases 1–5. It also prevents overstatement of the Phase-5 resolution: support is at the 99%-OTU-centroid level, not the unclustered-ASV level.
+Several parasite centroids nevertheless had equally or more similar neighbours carrying different low-level labels. This is consistent with the limited resolving power of the short 18S marker and argues against upgrading an association to a species-specific host claim from sequence similarity alone.
 
-## External reference matching
+## External biological validation
 
-The next sequence step is external reference matching/phylogenetic placement of the priority Syndiniales centroids against curated PR2/GenBank references, especially characterized Group I/II, *Amoebophrya*, and *Euduboscquella* sequences. This step should report alignment coverage and identity explicitly because the available V4-region centroids are short (~132 nt), and species-level assignments from short exact/near-exact matches require caution.
+The most informative validation therefore comes from **lineage-specific host biology**, not forced placement of a ~132-nt fragment. Kim et al. (2026) place the type species *Amoebophrya sticholonchae*, directly observed infecting the radiolarian *Sticholonche zanclea*, within MALV-II clade 7. This provides independent same-clade host-class precedent for the Group-II-clade-7/radiolarian association in our dataset. It does not demonstrate that our associated radiolarian taxon is infected.
 
-No infection claim should be upgraded solely from sequence identity: host interpretation still requires the independent biological evidence framework defined in Phase 4.
+Current phylogenomics also separates MALV-I from MALV-II/IV: Holt et al. (2023) retain Syndiniales for MALV-II/IV and place MALV-I with Ichthyodinida. Consequently, *Amoebophrya* host records from Group II must not be transferred directly to Group I associations.
+
+## Interpretation
+
+Phase 6 supports three statements:
+
+1. every priority sequence-cluster target is traceable to the exact abundance feature analyzed;
+2. the short centroids support operational higher-level clade assignments but not confident species/strain-level host identification;
+3. candidate-host interpretation should combine association statistics with lineage-specific independent biology.
+
+References: Kim et al. 2026, *Journal of Phycology*, `10.1111/jpy.70160`; Holt et al. 2023, *Nature Communications* 14:7049, `10.1038/s41467-023-42807-0`.

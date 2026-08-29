@@ -1,0 +1,13 @@
+metric,value
+formal_interaction_pairs,207
+FDR_significant_interactions,89
+stronger_le_220m,53
+stronger_gt_220m,36
+radiolaria_acantharea_tested,67
+radiolaria_acantharea_stronger_gt_220m,21
+radiolaria_deep_enrichment_odds_ratio,3.804347826086957
+radiolaria_deep_enrichment_p,0.0006508736099129
+radiolaria_deep_enrichment_q,0.0169227138577358
+CLR_nonmetazoan_same_direction_of_original_significant,87
+CLR_nonmetazoan_both_FDR_significant,68
+CLR_interaction_delta_spearman,0.889199

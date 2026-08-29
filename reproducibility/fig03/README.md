@@ -1,77 +1,38 @@
-# Figure 3 — seasonal vertical taxonomic succession and trophic organization
+# Figure 3 — vertical taxonomic succession and trophic representation
 
 ## Purpose
 
-Figure 3 links the objectively detected boundary shifts in Figure 2 to the organisms and trophic strategies contributing to vertical ecological reorganization.
+Figure 3 explains the biological succession underlying the transition analysis in Figure 2. Panels a–b show the full 16S and 18S records, whereas panel c displays the five-component 18S trophic representation using the same within-five normalization used for the matched Figure 2 trophic scan.
 
-## Inputs
+## Taxonomic panels (a–b)
 
-See `inputs.tsv`. Core inputs are cleaned 16S and 18S feature tables and taxonomies, integrated sample metadata containing depth class and season, and the sample-level 18S trophic-trait table.
+Feature counts are converted to sample-wise relative abundance. Features are aggregated primarily at Order; unresolved placeholder ranks fall back to Class and then Family. Display-label cleaning changes labels only, not aggregation or abundance.
 
-## Taxonomic panels
+Taxon selection is performed on the pooled marker-specific record before separating monitoring states. Median relative abundance is calculated for seven vertical habitat classes: Surface, Near-surface, DCM, Below DCM, 300–600 m, >600 m and Near-bottom. Taxa must reach at least 0.20% median relative abundance in one layer. Vertical differentiation is ranked as
 
-### Relative abundance
+`(maximum layer median - minimum layer median) * log(1 + 5 * maximum layer median)`.
 
-For each marker dataset, feature counts are converted to sample-wise percentages by dividing each feature count by the total retained counts in that sample and multiplying by 100.
+The 14 highest-ranking groups are retained for each marker and ordered from shallow- to deep-associated using an abundance-weighted depth centroid with representative depths 1, 50, 115, 190, 375, 1000 and 1450 m.
 
-### Taxonomic aggregation
+Winter/mixed and summer/stratified layer medians are then calculated for this fixed pooled taxon set. Each taxon is standardized jointly across all 14 state × habitat values, so winter and summer are directly comparable within a taxon. The same standardized display scale is used for panels a and b. Bubble area indicates maximum median relative abundance across all states and layers.
 
-Features are aggregated primarily at Order. If Order is absent, Class and then Family are used as fallback labels. This preserves interpretable terminal groups without discarding unresolved but abundant lineages.
+## Trophic panel (c)
 
-### Fixed taxon selection
+Five 18S-derived components are shown: bona fide phototrophy, constitutive mixotrophy, parasitism, radiolarian phagotrophy and diplonemid heterotrophy.
 
-Taxon selection is performed on the pooled dataset, before splitting samples by season. For each taxon, median relative abundance is calculated for each of seven vertical habitat classes:
+Before plotting, the five values are normalized among themselves within each sample to sum to 100%. This is the same selected-five normalization used before Hellinger transformation in the Figure 2 trophic-transition analysis. Figure 3 therefore decomposes the same trophic representation used to estimate the 110-m transition.
 
-1. Surface
-2. Near-surface
-3. DCM
-4. Below DCM
-5. 300–600 m
-6. >600 m
-7. Near-bottom
+Continuous winter/mixed and summer/stratified depth profiles use a logarithmically spaced depth grid from 8 to 1700 m. At each focal depth the half-window is `max(35 m, 0.22 × focal depth)`. A summary is drawn only when at least six samples occur within the window. Curves show the local median and envelopes show the interquartile range.
 
-Taxa must attain at least 0.20% median relative abundance in one layer. Vertical differentiation is ranked as:
+Dotted horizontal references mark pooled matched-sample optima independently estimated in Figure 2:
 
-`(maximum layer median - minimum layer median) * log(1 + 5 * maximum layer median)`
+- 110 m: trophic representation
+- 220 m: shared matched 16S and 18S taxonomic composition
 
-The 14 highest-ranking taxa are retained for each marker dataset. This selection is independent of season.
+Monitoring-state-specific transition optima remain in Figure 2 and are not added to Figure 3 to avoid visual clutter.
 
-### Taxon ordering
+## Reproducibility
 
-Rows are ordered from shallow- to deep-associated taxa using an abundance-weighted depth centroid. Representative layer depths used for ordering are 1, 50, 115, 190, 375, 1000 and 1450 m.
+`make_figure.py` is the authoritative implementation. It regenerates taxon selections, seasonal medians and z-scores, normalized trophic depth summaries, and the final horizontal Figure 3 from repository inputs.
 
-### Winter/summer comparison
-
-After the fixed pooled selection and ordering, median relative abundance is recalculated separately for winter and summer within each vertical layer. The same taxa and row order are therefore displayed in both seasons.
-
-### Heatmap scaling
-
-For each taxon, winter and summer layer medians are concatenated and standardized jointly. Thus each row is a z-score across 14 values (7 layers × 2 seasons), allowing direct seasonal comparison. Winter and summer are NOT independently standardized.
-
-### Abundance circles
-
-The circle adjacent to each taxon represents its maximum median relative abundance across all depth layers and both seasons. Circle area uses square-root scaling for readability. A shared size key converts circle sizes back to percent relative abundance.
-
-## Trophic-trait panels
-
-Five 18S-derived trophic traits are displayed: bona fide phototrophy, constitutive mixotrophy, parasitism, radiolarian phagotrophy and diplonemid heterotrophy.
-
-Sample-level trait values are plotted against continuous sampling depth separately for winter and summer. Local depth summaries use a moving depth window centered on a logarithmically spaced depth grid from 8 to 1700 m. The half-window is `max(35 m, 0.22 × focal depth)`. A summary is drawn only where at least six observations occur within the window. The line is the local median and the envelope is the interquartile range (25th–75th percentile). Faint points show individual observations. Winter is solid and summer dashed.
-
-Trait panels use independent horizontal scales because the traits differ strongly in absolute prevalence. Depth is plotted on a logarithmic axis.
-
-Horizontal dotted references at approximately 120, 170 and 220 m correspond to ecological transition depths independently identified by Figure 2 analyses; they are not fitted from the Figure 3 trait data.
-
-## Output
-
-Final manuscript asset:
-
-- `Figure3_vertical_succession_winter_summer_split_v2.svg`
-- corresponding vector PDF
-- 600-dpi JPEG for manuscript drafting
-
-The v2 layout includes the abundance-size key and spacing correction for the longest 18S taxonomic label.
-
-## Reproducibility status
-
-The complete analytical specification and inputs are now versioned. `make_figure.py` reproduces the analytical panels and should be treated as the authoritative implementation; any later aesthetic change should be made there rather than manually in the SVG.
+The frozen numerical outputs in `results/fig03/` correspond to the current manuscript figure. Trait proportions are marker-gene-derived representation, not direct measurements of biomass, grazing, photosynthesis or carbon flux.

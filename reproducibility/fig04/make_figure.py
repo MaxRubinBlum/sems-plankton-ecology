@@ -16,12 +16,13 @@ O16 = ROOT / 'data/raw/16S/otu_table_prok_clean.csv.gz'
 O18 = ROOT / 'data/raw/18S/otu_table_euk_clean.csv.gz'
 META = ROOT / 'data/processed/metadata/18S_samples_CTD_chemistry.csv'
 OUT = ROOT / 'results/figure4_cross_domain_concordance'
-OUT.mkdir(parents=True, exist_ok=True)
+OUT.mkdir(parents=True,exist_ok=True)
 
 AXES = 8
 N_PERM = 9999
 SEED = 42
 ENV = ['depth','ctd_temperature','ctd_salinity','ctd_oxygen','ctd_fluorescence']
+CHEM = ['chem_no3_no2_umol_kg','chem_po4_umol_kg','chem_silicate_umol_kg','chem_pH_total_25C']
 REGIMES = ['A_surface','B_nearsurface','C_DCM','D_below_DCM','F_300-600','G_below_600','H_near_bottom']
 REGIME_NAMES = ['Surface','Near-surface','DCM','Below DCM','300–600 m','>600 m','Near-bottom']
 
@@ -61,8 +62,9 @@ def protest(a,b,nperm=N_PERM,seed=SEED):
     p=(1+np.sum(null>=obs))/(nperm+1)
     return obs,p
 
-def design(m):
-    e=m[ENV].copy(); e['log_depth']=np.log1p(e['depth']); e=e.drop(columns='depth')
+def design(m, extra=None):
+    cols = ENV + ([] if extra is None else list(extra))
+    e=m[cols].copy(); e['log_depth']=np.log1p(e['depth']); e=e.drop(columns='depth')
     e=pd.concat([e,pd.get_dummies(m['season'],drop_first=True,dtype=float),
                  pd.get_dummies(m['station'],drop_first=True,dtype=float)],axis=1)
     return StandardScaler().fit_transform(e.astype(float))
@@ -78,6 +80,20 @@ if len(ids_adj) != 248:
     raise ValueError(f'Expected 248 complete environmental cases, found {len(ids_adj)}.')
 A=pcoa(o16,ids_adj); B=pcoa(o18,ids_adj); X=design(m)
 Ar=residualize(A,X); Br=residualize(B,X); Aa,Ba,r_adj=align(Ar,Br); _,p_adj=protest(Ar,Br)
+
+# Chemistry-complete sensitivity: compare the hydrographic adjustment and the
+# hydrographic + nutrient/pH adjustment on the exact same 67 paired samples.
+good_chem=meta.loc[ids,ENV+CHEM].notna().all(axis=1)
+ids_chem=list(np.array(ids)[good_chem.values]); mc=meta.loc[ids_chem]
+if len(ids_chem) != 67:
+    raise ValueError(f'Expected 67 chemistry-complete paired samples, found {len(ids_chem)}.')
+Ac=pcoa(o16,ids_chem); Bc=pcoa(o18,ids_chem)
+Xc_h=design(mc); Ach=residualize(Ac,Xc_h); Bch=residualize(Bc,Xc_h); r_chem_h,p_chem_h=protest(Ach,Bch)
+Xc_full=design(mc,CHEM); Acf=residualize(Ac,Xc_full); Bcf=residualize(Bc,Xc_full); r_chem_full,p_chem_full=protest(Acf,Bcf)
+pd.DataFrame([
+    ['hydrographic_covariates',len(ids_chem),r_chem_h,p_chem_h],
+    ['hydrographic_plus_chemistry',len(ids_chem),r_chem_full,p_chem_full],
+],columns=['analysis','n','procrustes_r','p']).to_csv(OUT/'chemistry_sensitivity_summary.csv',index=False)
 
 rows=[]
 for reg in REGIMES:

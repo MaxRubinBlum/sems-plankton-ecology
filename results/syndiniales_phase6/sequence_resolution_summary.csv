@@ -1,0 +1,15 @@
+metric,value
+representative_features,40736
+OTU_table_features,40736
+feature_id_sets_identical,TRUE
+priority_targets_requested,78
+priority_targets_found,78
+priority_targets_unique,78
+centroid_length_min_nt,130
+centroid_length_median_nt,132
+centroid_length_max_nt,136
+nearest_neighbor_median_similarity,0.985
+top_neighbor_same_class_fraction,0.859
+top_neighbor_same_order_fraction,0.795
+feature_unit,99%-de-novo-OTU-centroid
+species_level_host_assignment_supported,FALSE

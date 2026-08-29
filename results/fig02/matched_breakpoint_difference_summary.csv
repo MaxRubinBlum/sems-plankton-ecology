@@ -1,0 +1,4 @@
+layer_a,layer_b,median_b_minus_a_m,ci95_low_m,ci95_high_m,prob_a_shallower_b,prob_equal,prob_a_deeper_b
+traits,16S,110.0,30.0,140.0,1.0,0.0,0.0
+traits,18S,110.0,30.0,140.0,0.998,0.002,0.0
+16S,18S,0.0,-20.0,80.0,0.146,0.804,0.05

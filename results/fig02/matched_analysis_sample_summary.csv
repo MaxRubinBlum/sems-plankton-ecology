@@ -1,0 +1,2 @@
+n_paired_all_depths,n_paired_le650m,n_profiles_le650m,n_winter_le650m,n_summer_le650m,minimum_spanning_profiles_primary,minimum_spanning_profiles_bootstrap,n_metadata_station_mismatches_le650m,max_depth_metadata_difference_m
+308,252,52,116,136,12,15,0,1.0

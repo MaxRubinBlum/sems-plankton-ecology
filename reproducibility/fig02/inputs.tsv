@@ -1,15 +1,19 @@
-role	input	purpose
-source	data/otu_table_prok_clean.csv	16S community matrix
-source	data/otu_table_euk_clean.csv	18S community matrix
-intermediate	data/16S_samples_CTD_chemistry.csv	16S depth/station/season/bottom-depth/near-bottom metadata
-intermediate	data/18S_samples_CTD_chemistry.csv	18S depth/station/season/bottom-depth/near-bottom metadata
-intermediate	data/sample_level_core_functional_traits.csv	18S-derived trophic-trait matrix
-source	data/CTD_profiles/	raw or minimally processed fluorescence profiles for independent DCM extraction
-output	results/fig02/boundary_scan_global.csv	global candidate-depth scores
-output	results/fig02/boundary_scan_seasonal.csv	winter/summer candidate-depth scores
-output	results/fig02/boundary_bootstrap.csv	profile-bootstrap peak-depth distributions
-output	results/fig02/boundary_permutation.csv	max-statistic permutation null distribution/results
-output	results/fig02/breakpoint_estimates.csv	global and seasonal breakpoint estimates and uncertainty
-output	results/fig02/covariate_controlled_boundary.csv	deep-boundary test controlling for station, bottom depth and near-bottom status
-output	results/fig02/dcm_peaks_from_ctd.csv	CTD fluorescence-derived DCM peak depths including dual peaks
-output	results/fig02/candidate_depth_support.csv	profile/sample support at each candidate depth
+role	path	purpose
+source	data/raw/16S/otu_table_prok_clean.csv.gz	clean 16S 99%-OTU abundance table
+source	data/raw/18S/otu_table_euk_clean.csv.gz	clean 18S 99%-OTU abundance table
+metadata	data/processed/metadata/16S_samples_CTD_chemistry.csv	16S depth/station/season/cruise metadata
+metadata	data/processed/metadata/18S_samples_CTD_chemistry.csv	18S depth/station/season/cruise metadata; authoritative matched metadata
+traits	data/processed/traits/sample_level_core_functional_traits.csv	five-component 18S trophic representation
+derived_context	results/fig02/dcm_peaks_from_ctd.csv	CTD fluorescence-derived DCM peaks used only for background shading
+output	results/fig02/matched_boundary_scans.csv	matched pooled and state-specific scans using >=12 spanning profiles
+output	results/fig02/matched_boundary_optima.csv	transition optima for matched scans
+output	results/fig02/matched_joint_profile_bootstrap.csv	500 joint profile-bootstrap replicates using conservative >=15 profile support
+output	results/fig02/matched_bootstrap_summary.csv	median and 95% interval of pooled bootstrap optima
+output	results/fig02/matched_breakpoint_difference_summary.csv	pairwise bootstrap differences and ordering probabilities
+output	results/fig02/matched_state_profile_bootstrap.csv	state-specific profile-bootstrap distributions
+output	results/fig02/matched_profile_shuffle_maxstat.csv	profile-restricted scan-wide maximum-statistic tests
+output	results/fig02/matched_nuisance_sensitivity.csv	pooled sensitivity to station, station+state and profile nuisance models
+output	results/fig02/minimum_profile_sensitivity.csv	sensitivity to minimum support of 10, 12 and 15 spanning profiles
+output	results/fig02/long_16S_2018_2026_scans.csv	full 2018–2026 16S contextual scans
+output	results/fig02/paired_metadata_audit.csv	paired 16S/18S metadata consistency audit
+figure	results/fig02/Figure2_final_clean.svg	generated vector figure; PDF/PNG generated alongside it

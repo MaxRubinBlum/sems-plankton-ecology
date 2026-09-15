@@ -1,7 +1,0 @@
-Extract this archive into the root of your local sems-plankton-ecology repository.
-Then in GitHub Desktop commit all new/changed data files and Push origin.
-
-Or from a terminal:
-git add data/ README_DATA.md VALIDATION.json SHA256SUMS.csv
-git commit -m "Add complete cleaned data, taxonomy and metadata"
-git push origin main

@@ -1,0 +1,11 @@
+.Rhistory
+.RData
+.Ruserdata
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
+.env
+.venv/
+venv/

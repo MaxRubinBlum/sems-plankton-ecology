@@ -1,11 +1,17 @@
-# Processed data manifest
+# Processed data
 
-Processed files are generated from the raw data under `data/raw/` and are not substitutes for the raw source tables.
+Derived files in this directory are generated from the analysis-ready source tables under `data/raw/`.
 
-Figure 4 requires:
+## Metadata
 
-- `data/processed/18S_samples_CTD_chemistry.csv` — integrated sample metadata containing at least `sample-id`, `depth`, `ds2`, `season`, `station`, `ctd_temperature`, `ctd_salinity`, `ctd_oxygen`, and `ctd_fluorescence`.
+Integrated metadata are stored under `data/processed/metadata/`. The Figure 4 workflow uses `data/processed/metadata/18S_samples_CTD_chemistry.csv`, containing sample identifiers, depth, vertical class, monitoring state, station and measured environmental variables.
 
-The validated Figure 4 analysis expects 308 samples shared among the 16S table, 18S table and this metadata table, with 248 complete cases for the five environmental variables used in the adjusted analysis.
+## Frozen Figure 4 dataset
 
-The current working-session source for this processed table was `18S_samples_CTD_chemistry.csv` from the environmental-integration workflow. Preserve sample IDs exactly so they match the 16S and 18S abundance-table column names.
+The exact paired Figure 4 inputs are stored under `data/processed/fig04/`:
+
+- `metadata_fig4_308.csv`
+- `otu_table_prok_fig4_308.csv.gz`
+- `otu_table_euk_fig4_308.csv.gz`
+
+The validated analysis contains 308 paired samples and 248 complete cases for the hydrographic adjustment. Preserve sample identifiers exactly so metadata and abundance-table columns remain aligned.

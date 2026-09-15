@@ -1,41 +1,51 @@
 # SEMS plankton ecology
 
-Reproducible analysis of long-term 16S and 18S rRNA amplicon datasets from Eastern Mediterranean Sea water-column transects.
+Data, code and analytical provenance for the manuscript **Coordinated microbial community turnover across an ultra-oligotrophic water column**.
 
-The project is organized around vertical ecosystem structure across prokaryotes, microbial eukaryotes and metazoan 18S signatures, with additional analyses of cross-domain ecological associations and depth-specific taxonomic succession.
+The study combines long-term 16S and 18S rRNA gene amplicon surveys with hydrographic and chemical observations from the southeastern Mediterranean Sea. The repository supports the analyses of vertical community transitions, trophic representation, cross-domain concordance and MALV parasite associations.
 
-## Repository layout
+## Start here
 
-- `data/raw/` — original input tables and metadata; never edited in place
-- `data/processed/` — reproducibly filtered/derived tables
-- `scripts/` — analysis and data-processing code
-- `results/` — derived statistics, tables and figures
-- `docs/` — methods/provenance notes
+1. Read [README_DATA.md](README_DATA.md) for the data inventory.
+2. Install the Python dependencies:
+
+   ```bash
+   python -m pip install -r reproducibility/requirements.txt
+   ```
+
+3. Read [reproducibility/README.md](reproducibility/README.md) for the analysis map and figure-specific commands.
+4. Compare regenerated results with the frozen checkpoints in [reproducibility/VALIDATION.md](reproducibility/VALIDATION.md).
+
+Figure 5 and parts of the MALV workflow additionally require Julia and FlashWeave; their environment files are stored beside the relevant scripts.
+
+## Repository structure
+
+- `data/raw/` — cleaned source abundance and taxonomy tables used by the analyses
+- `data/processed/` — integrated metadata and frozen derived inputs
+- `data/figure_inputs/` — compact figure-level inputs
+- `reproducibility/` — authoritative figure workflows and validation checkpoints
+- `results/` — versioned numerical outputs and selected figure products
+- `methods/` — detailed analytical methods
+- `docs/` — provenance notes, taxonomy decisions and archived analytical checkpoints
+- `scripts/` — supporting data-processing and comparison utilities
 
 ## Core depth grouping
 
-The primary ecological depth grouping is the `ds3` field already present in the metadata:
+The `ds3` metadata field defines the primary ecological depth classes:
 
 1. `A_surface`
 2. `B_nearsurface`
 3. `C_DCM`
 4. `D_below_DCM`
 5. `F_300-600`
-6. `G_below_600` (includes near-bottom samples)
+6. `G_below_600` (including near-bottom samples)
 
-## Taxonomy
+## Taxonomy and feature terminology
 
-Two prokaryotic taxonomic assignments are retained for comparison and traceability:
+The repository retains the original SILVA-based prokaryotic taxonomy and a GTDB release 226 crosswalk for comparison and traceability. The 18S taxonomy follows PR2.
 
-- the original SILVA-based taxonomy
-- GTDB release 226 taxonomy generated with the QIIME 2 sklearn classifier
+The amplicon features used here are **99% de-novo OTU clusters represented by centroid sequences**, not unclustered ASVs. See [docs/TAXONOMY_CROSSWALK.md](docs/TAXONOMY_CROSSWALK.md) and [reproducibility/syndiniales/INPUT_MANIFEST.md](reproducibility/syndiniales/INPUT_MANIFEST.md).
 
-The GTDB workflow is documented in `docs/taxonomy.md`.
+## Reuse and citation
 
-18S taxonomy and the original metazoan-containing 18S table are retained so that microbial-eukaryote and metazoan signals can be analyzed separately.
-
-## Data policy
-
-Raw tables are immutable. Cleaning and taxonomic filtering are performed only by scripts and written to `data/processed/`.
-
-Repository is currently private while analyses and manuscripts are in development.
+Code is released under the [MIT License](LICENSE). Cite the associated manuscript when using the analyses or data; full publication details and accession identifiers will be added after acceptance. Marker-gene read proportions are compositional proxies and should not be interpreted as cell abundance, biomass or process rates.
